@@ -1,0 +1,47 @@
+/* General resets */
+body {
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  /* Landing page */
+  .landing-bg {
+    background: linear-gradient(135deg, #004d7a, #008793, #00bf72);
+    height: 100vh;
+    padding: 2rem;
+  }
+  
+  /* QnA background */
+  .qna-bg {
+    background: linear-gradient(to right, #e3f2fd, #ffffff);
+    min-height: 100vh;
+  }
+  
+  /* Animate fade-in on answer */
+  .fade-in {
+    animation: fadeIn 0.5s ease-in;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  .card {
+    background-color: #ffffffd9;
+    backdrop-filter: blur(8px);
+  }
+  
+  /* Enhance submit button */
+  button.btn-primary {
+    font-weight: 500;
+    font-size: 1.1rem;
+    border-radius: 0.5rem;
+  }
+  
+  /* Make source list look clean */
+  #sourceList li {
+    background-color: #f9f9f9;
+    margin-bottom: 4px;
+    border-left: 4px solid #0d6efd;
+    padding-left: 10px;
+  }  

@@ -12,7 +12,7 @@ async function askQuestion() {
   answerBox.classList.remove("visually-hidden");
 
   try {
-    const response = await fetch("https://smart-qna-xxxxxxxxxx.a.run.app/ask", {
+    const response = await fetch("https://smart-qna-307756948431.us-central1.run.app/ask", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

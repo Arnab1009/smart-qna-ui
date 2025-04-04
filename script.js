@@ -29,7 +29,19 @@ async function askQuestion() {
     (data.sources || []).forEach((src, idx) => {
       const li = document.createElement("li");
       li.classList.add("list-group-item");
-      li.textContent = `${idx + 1}. ${src}`;
+    
+      // Extract arXiv ID from the filename
+      const match = src.match(/(\d{4}\.\d{5,})(v\d+)?\.pdf/);
+      if (match) {
+        const arxivId = match[1] + (match[2] || "");
+        const arxivUrl = `https://arxiv.org/pdf/${arxivId}.pdf`;
+    
+        li.innerHTML = `<a href="${arxivUrl}" target="_blank">${idx + 1}. ${src}</a>`;
+      } else {
+        // fallback to plain text if pattern doesn't match
+        li.textContent = `${idx + 1}. ${src}`;
+      }
+    
       sourceList.appendChild(li);
     });
 

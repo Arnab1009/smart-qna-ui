@@ -30,15 +30,26 @@ async function askQuestion() {
       const li = document.createElement("li");
       li.classList.add("list-group-item");
     
-      // Extract arXiv ID from the filename
-      const match = src.match(/(\d{4}\.\d{5,})(v\d+)?\.pdf/);
-      if (match) {
-        const arxivId = match[1] + (match[2] || "");
-        const arxivUrl = `https://arxiv.org/pdf/${arxivId}.pdf`;
+      try {
+        // Split and get last part
+        const parts = src.split("_");
+        const filename = parts[parts.length - 1]; // e.g., "2403.00807v1.pdf"
     
-        li.innerHTML = `<a href="${arxivUrl}" target="_blank">${idx + 1}. ${src}</a>`;
-      } else {
-        // fallback to plain text if pattern doesn't match
+        // Remove .pdf and extract arXiv ID + version
+        const arxivMatch = filename.replace(".pdf", "").match(/(\d{4}\.\d{5,})(v\d+)?/);
+    
+        if (arxivMatch) {
+          const arxivId = arxivMatch[1] + (arxivMatch[2] || "");
+          const arxivUrl = `https://arxiv.org/pdf/${arxivId}.pdf`;
+    
+          li.innerHTML = `<a href="${arxivUrl}" target="_blank" class="text-decoration-none">
+            ${idx + 1}. arXiv:${arxivId}
+          </a>`;
+        } else {
+          li.textContent = `${idx + 1}. ${src}`;
+        }
+    
+      } catch (err) {
         li.textContent = `${idx + 1}. ${src}`;
       }
     

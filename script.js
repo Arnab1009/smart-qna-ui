@@ -29,30 +29,12 @@ async function askQuestion() {
     (data.sources || []).forEach((src, idx) => {
       const li = document.createElement("li");
       li.classList.add("list-group-item");
-    
-      try {
-        // Split and get last part
-        const parts = src.split("_");
-        const filename = parts[parts.length - 1]; // e.g., "2403.00807v1.pdf"
-    
-        // Remove .pdf and extract arXiv ID + version
-        const arxivMatch = filename.replace(".pdf", "").match(/(\d{4}\.\d{5,})(v\d+)?/);
-    
-        if (arxivMatch) {
-          const arxivId = arxivMatch[1] + (arxivMatch[2] || "");
-          const arxivUrl = `https://arxiv.org/pdf/${arxivId}.pdf`;
-    
-          li.innerHTML = `<a href="${arxivUrl}" target="_blank" class="text-decoration-none">
-            ${idx + 1}. arXiv:${arxivId}
-          </a>`;
-        } else {
-          li.textContent = `${idx + 1}. ${src}`;
-        }
-    
-      } catch (err) {
-        li.textContent = `${idx + 1}. ${src}`;
-      }
-    
+      const parts = src.split("_");
+      let id = parts[parts.length - 1]; // e.g., "2403.00807v1.pdf"
+      const url = `https://arxiv.org/pdf/${id}`;
+      li.innerHTML = `<a href="${url}" target="_blank" class="text-decoration-none">
+        ${idx + 1}. ${src}
+      </a>`;
       sourceList.appendChild(li);
     });
 
